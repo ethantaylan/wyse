@@ -12,7 +12,7 @@ export type LangageState = {
 };
 
 export const langageInitialState: LangageState = {
-  langage: null,
+  langage: 'en',
 };
 
 export enum LangageActionsType {

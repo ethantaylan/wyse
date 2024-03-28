@@ -11,6 +11,7 @@ import { SelectLangage } from "../components/select-langage";
 import { en } from "../constants/advices/en";
 import { fr } from "../constants/advices/fr";
 import { useLangageState } from "../context";
+import { useNavigate } from "react-router-dom";
 
 export const Quotes: FC = () => {
   const { langage } = useLangageState();
@@ -19,6 +20,8 @@ export const Quotes: FC = () => {
 
   const quote = langage === "fr" ? fr[index] : en[index];
 
+  const navigate = useNavigate()
+
   const springs = useSpring({
     config: { duration: 1500 },
     from: { opacity: 0 },
@@ -26,13 +29,13 @@ export const Quotes: FC = () => {
   });
 
   return (
-    <div className="h-screen w-screen p-10 font-serif flex flex-col">
+    <div className="h-screen w-screen p-5 font-serif flex flex-col">
       <div className="flex my-4 justify-between">
-        <span className="font-bold text-xl">wyse</span>
+        <span onClick={() => navigate('/')} className="font-bold cursor-pointer text-2xl">wyse</span>
         <SelectLangage />
       </div>
 
-      <div className="flex relative border flex-col bg-slate-50 p-10">
+      <div className="flex relative flex-col bg-slate-50 p-10">
         <animated.div
           style={{ ...springs }}
           className="text-3xl min-h-20 italic"
@@ -51,7 +54,7 @@ export const Quotes: FC = () => {
             <FaShare />
           </button>
 
-          <button className="text-slate-400 hover:text-slate-600">
+          <button className="text-red-400 hover:text-red-600">
             <FaHeart />
           </button>
         </div>
@@ -67,6 +70,7 @@ export const Quotes: FC = () => {
         <span className="p-3 px-5 font-bold bg-slate-100">
           {index + 1} / 50
         </span>
+
         <button
           className="btn bg-slate-100"
           onClick={() => setIndex(index + 1)}
