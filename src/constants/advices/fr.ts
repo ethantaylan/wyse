@@ -39,7 +39,6 @@ export const fr: string[] = [
   "Envoyez beaucoup de cartes de Saint-Valentin. Signez-les, « Quelqu'un qui pense que vous êtes formidable. »",
   "Répondez au téléphone avec enthousiasme et énergie dans votre voix.",
   "Gardez un bloc-notes et un crayon sur votre table de chevet. Des idées valant des millions de dollars peuvent parfois survenir à 3 heures du matin.",
-  "Ne vous attendez pas à ce que la vie soit juste.",
   "Montrez du respect pour tous ceux qui travaillent pour gagner leur vie, peu importe la trivialité de leur travail",
   "Envoyez des fleurs à vos proches. Trouvez une raison plus tard.",
   "Faites la journée de quelqu'un en payant le péage pour la personne dans la voiture derrière vous",

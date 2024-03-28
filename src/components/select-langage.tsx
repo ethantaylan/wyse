@@ -23,7 +23,10 @@ export const SelectLangage: FC = () => {
         <button
           key={l}
           onClick={() => handleLangageDispatch(l)}
-          className={clsx("hover:font-black text-slate-400", l === langage && "font-black text-black")}
+          className={clsx(
+            "hover:font-bold hover:text-white text-sm font-sans text-neutral-400",
+            l === langage && "font-black text-white",
+          )}
         >
           {l.toUpperCase()}
         </button>
