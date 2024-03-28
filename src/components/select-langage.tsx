@@ -24,7 +24,7 @@ export const SelectLangage: FC = () => {
           key={l}
           onClick={() => handleLangageDispatch(l)}
           className={clsx(
-            "hover:font-bold hover:text-white font-sans text-neutral-400",
+            "hover:font-bold hover:text-white text-sm font-sans text-neutral-400",
             l === langage && "font-black text-white",
           )}
         >

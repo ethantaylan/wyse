@@ -39,7 +39,6 @@ export const en: string[] = [
   "Send a lot of Valentine cards. Sign them, ‘Someone who thinks you’re terrific.’",
   "Answer the phone with enthusiasm and energy in your voice.",
   "Keep a note pad and pencil on your bed-side table. Million-dollar ideas sometimes strike at 3 a.m.",
-  "Don’t expect life to be fair.",
   "Show respect for everyone who works for a living, regardless of how trivial their job",
   "Send your loved ones flowers. Think of a reason later.",
   "Make someone’s day by paying the toll for the person in the car behind you",
