@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import {
-  FaChevronDown,
-  FaChevronUp,
+  FaChevronLeft,
+  FaChevronRight,
   FaCopy,
   FaHeart,
   FaShare,
@@ -38,18 +38,27 @@ export const Quotes: FC = () => {
     const delta = event.deltaY;
     setAccumulatedDelta((prevDelta) => prevDelta + delta);
     if (Math.abs(accumulatedDelta) >= scrollThreshold) {
-      const scrollIncrement = Math.floor(Math.abs(accumulatedDelta) / scrollThreshold);
+      const scrollIncrement = Math.floor(
+        Math.abs(accumulatedDelta) / scrollThreshold,
+      );
       if (delta > 0) {
-        setIndex((prevIndex) => (prevIndex === lastIndex ? 0 : prevIndex + scrollIncrement));
+        setIndex((prevIndex) =>
+          prevIndex === lastIndex ? 0 : prevIndex + scrollIncrement,
+        );
       } else {
-        setIndex((prevIndex) => (prevIndex === 0 ? lastIndex : prevIndex - scrollIncrement));
+        setIndex((prevIndex) =>
+          prevIndex === 0 ? lastIndex : prevIndex - scrollIncrement,
+        );
       }
       setAccumulatedDelta(0);
     }
   };
 
   return (
-    <div className="h-screen w-screen p-5 font-serif flex flex-col" onWheel={handleScroll}>
+    <div
+      className="h-screen w-screen p-5 font-serif flex flex-col"
+      onWheel={handleScroll}
+    >
       <div className="flex justify-between">
         <span
           onClick={() => navigate("/")}
@@ -60,15 +69,8 @@ export const Quotes: FC = () => {
         <SelectLangage />
       </div>
 
-      <div className="flex items-center justify-center">
-        <div className="flex flex-col max-w-5xl text-center text-2xl items-center justify-center mt-20">
-          <button
-            onClick={() => setIndex(index === 0 ? 49 : index - 1)}
-            className="mb-10 btn btn-sm btn-ghost"
-          >
-            <FaChevronUp className="text-neutral-500 text-base cursor-pointer" />
-          </button>
-
+      <div className="flex h-full items-center justify-center">
+        <div className="flex px-5 flex-col max-w-5xl text-center text-2xl items-center justify-center mt-20">
           <div className="flex text-sm items-center text-neutral-900 justify-center">
             {q}
             {index === 0 ? getQuoteAtIndex(48) : getQuoteAtIndex(index - 2)}
@@ -81,7 +83,7 @@ export const Quotes: FC = () => {
             {q}
           </div>
 
-          <div className="flex items-center min-h-44 flex-col pt-10">
+          <div className="flex items-center flex-col py-10">
             {q}
             {getQuoteAtIndex(index)}
             {q}
@@ -107,30 +109,23 @@ export const Quotes: FC = () => {
               : getQuoteAtIndex(index + 2)}
             {q}
           </div>
-
-          <button
-            onClick={() => setIndex(index === lastIndex ? 0 : index + 1)}
-            className="mt-10 btn btn-sm btn-ghost"
-          >
-            <FaChevronDown className="text-neutral-500 text-base cursor-pointer" />
-          </button>
         </div>
       </div>
       <div className="flex w-full justify-between">
         <span
-          onClick={() => setIndex(0)}
+          onClick={() => setIndex(index === 0 ? 49 : index - 1)}
           className="my-5 btn text-sm text-neutral-600"
         >
-          1
+          <FaChevronLeft />
         </span>
 
         <span className="my-5 text-sm text-neutral-600">{index + 1} / 50</span>
 
         <span
-          onClick={() => setIndex(lastIndex)}
+          onClick={() => setIndex(index === lastIndex ? 0 : index + 1)}
           className="my-5 btn text-sm text-neutral-600"
         >
-          50
+          <FaChevronRight />
         </span>
       </div>
     </div>
