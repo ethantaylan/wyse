@@ -1,25 +1,22 @@
-@-webkit-keyframes rotate-center {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes rotate-center {
-  0% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+.in-and-out {
+  -webkit-animation: in-and-out 30s linear infinite;
+  animation: in-and-out 30s linear infinite;
 }
 
-.rotate-center {
-  -webkit-animation: rotate-center 45s linear infinite;
-  animation: rotate-center 45s linear infinite;
+@keyframes in-and-out {
+  0% {
+    transform: translateY(10%);
+  }
+  25% {
+    transform: translateX(10%);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  75% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateY(10%);
+  }
 }
