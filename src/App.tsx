@@ -7,7 +7,7 @@ import { Welcome } from "./pages/welcome";
 
 export default function App() {
   const springs = useSpring({
-    config: { duration: 1500 },
+    config: { duration: 3500 },
     from: { opacity: 0 },
     to: { opacity: 1 },
   });

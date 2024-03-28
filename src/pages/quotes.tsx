@@ -1,82 +1,92 @@
-import { animated, useSpring } from "@react-spring/web";
 import { FC, useState } from "react";
 import {
-  FaAngleLeft,
-  FaAngleRight,
+  FaChevronDown,
+  FaChevronUp,
   FaCopy,
   FaHeart,
   FaShare,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { SelectLangage } from "../components/select-langage";
 import { en } from "../constants/advices/en";
 import { fr } from "../constants/advices/fr";
 import { useLangageState } from "../context";
-import { useNavigate } from "react-router-dom";
 
 export const Quotes: FC = () => {
   const { langage } = useLangageState();
 
-  const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState<number>(10);
 
+  const navigate = useNavigate();
+
+  const twoLastQuote = langage === "fr" ? fr[index - 2] : en[index - 2];
+
+  const lastQuote = langage === "fr" ? fr[index - 1] : en[index - 1];
   const quote = langage === "fr" ? fr[index] : en[index];
+  const nextQuote = langage === "fr" ? fr[index + 1] : en[index + 1];
 
-  const navigate = useNavigate()
+  const twoNextQuote = langage === "fr" ? fr[index + 2] : en[index + 2];
 
-  const springs = useSpring({
-    config: { duration: 1500 },
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-  });
+  const q = "''";
 
   return (
     <div className="h-screen w-screen p-5 font-serif flex flex-col">
-      <div className="flex my-4 justify-between">
-        <span onClick={() => navigate('/')} className="font-bold cursor-pointer text-2xl">wyse</span>
+      <div className="flex justify-between">
+        <span className="text-4xl font-bold">wyse</span>
         <SelectLangage />
       </div>
 
-      <div className="flex relative flex-col bg-slate-50 p-10">
-        <animated.div
-          style={{ ...springs }}
-          className="text-3xl min-h-20 italic"
-        >
-          {"''"}
-          {quote}
-          {"''"}
-        </animated.div>
+      <div className="flex items-center justify-center">
+        <div className="flex flex-col max-w-5xl text-center text-4xl items-center justify-center mt-20">
+          <FaChevronUp
+            onClick={() => setIndex(index - 1)}
+            className="mb-10 text-base cursor-pointer"
+          />
 
-        <div className="flex mt-10 gap-10 justify-center items-center">
-          <button className="text-slate-400 hover:text-slate-600">
-            <FaCopy />
-          </button>
+          <div className="flex text-sm items-center text-neutral-900 justify-center">
+            {q}
+            {twoLastQuote}
+            {q}
+          </div>
 
-          <button className="text-slate-400 hover:text-slate-600">
-            <FaShare />
-          </button>
+          <div className="flex text-xl mt-3 items-center text-neutral-800 justify-center">
+            {q}
+            {lastQuote}
+            {q}
+          </div>
 
-          <button className="text-red-400 hover:text-red-600">
-            <FaHeart />
-          </button>
+          <div className="flex items-center flex-col py-10">
+            {q}
+            {quote}
+            {q}
+            <div className="flex mt-4 gap-5">
+              <FaShare className="text-neutral-800 text-base" />
+              <FaCopy className="text-neutral-800 text-base" />
+              <FaHeart className="text-red-800 text-base" />
+            </div>
+          </div>
+
+          <div className="flex text-xl items-center text-neutral-800 justify-center">
+            {q}
+            {nextQuote}
+            {q}
+          </div>
+
+          <div className="flex text-sm mt-3 items-center text-neutral-900 justify-center">
+            {q}
+            {twoNextQuote}
+            {q}
+          </div>
+
+          <FaChevronDown
+            onClick={() => setIndex(index + 1)}
+            className="mt-10 text-base cursor-pointer"
+          />
+
+          <span className="my-5 text-sm text-neutral-600">
+            {index + 1} / 50
+          </span>
         </div>
-      </div>
-
-      <div className="join flex justify-center items-center gap-10 mt-10">
-        <button
-          className="btn bg-slate-100"
-          onClick={() => setIndex(index - 1)}
-        >
-          <FaAngleLeft />
-        </button>
-        <span className="p-3 px-5 font-bold bg-slate-100">
-          {index + 1} / 50
-        </span>
-
-        <button
-          className="btn bg-slate-100"
-          onClick={() => setIndex(index + 1)}
-        >
-          <FaAngleRight />
-        </button>
       </div>
     </div>
   );
