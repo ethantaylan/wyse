@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -21,14 +21,12 @@ export const Quotes: FC = () => {
   const lastIndex = quotes.length - 1;
 
   const getQuoteAtIndex = (i: number) => {
-    if (i < 0) return "";
-    if (i > lastIndex) return "";
     return quotes[i];
   };
 
   const q = "''";
   const [accumulatedDelta, setAccumulatedDelta] = useState<number>(0);
-  const scrollThreshold = 50; // Adjust this value as needed
+  const scrollThreshold = 50;
 
   useEffect(() => {
     console.log(index);
@@ -111,19 +109,33 @@ export const Quotes: FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full justify-between">
+      <div className="flex w-full items-center justify-between">
         <span
           onClick={() => setIndex(index === 0 ? 49 : index - 1)}
-          className="my-5 btn text-sm text-neutral-600"
+          className="my-5 btn btn-sm text-sm text-neutral-600"
         >
           <FaChevronLeft />
         </span>
 
-        <span className="my-5 text-sm text-neutral-600">{index + 1} / 50</span>
+        <div className="w-4/6 relative flex flex-col items-center">
+          <span className="text-sm mb-3 -top-10 absolute text-neutral-600">
+            {index + 1} / 50
+          </span>
+          <input
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setIndex(+e.target.value)
+            }
+            type="range"
+            min={0}
+            max={49}
+            value={index}
+            className="range range-primary range-xs"
+          />
+        </div>
 
         <span
           onClick={() => setIndex(index === lastIndex ? 0 : index + 1)}
-          className="my-5 btn text-sm text-neutral-600"
+          className="my-5 btn btn-sm text-sm text-neutral-600"
         >
           <FaChevronRight />
         </span>
