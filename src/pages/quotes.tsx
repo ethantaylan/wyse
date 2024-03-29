@@ -4,9 +4,10 @@ import {
   FaChevronRight,
   FaCopy,
   FaHeart,
-  FaShare,
+  FaWhatsapp,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { WhatsappShareButton } from "react-share";
 import { SelectLangage } from "../components/select-langage";
 import { en } from "../constants/advices/en";
 import { fr } from "../constants/advices/fr";
@@ -15,6 +16,9 @@ import { useLangageState } from "../context";
 export const Quotes: FC = () => {
   const { langage } = useLangageState();
   const [index, setIndex] = useState<number>(0);
+
+  const [isCopyAlertShowing, setIsCopyAlertShowing] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const quotes = langage === "fr" ? fr : en;
@@ -28,9 +32,18 @@ export const Quotes: FC = () => {
   const [accumulatedDelta, setAccumulatedDelta] = useState<number>(0);
   const scrollThreshold = 50;
 
+  const handleCopyQuote = () => {
+    navigator.clipboard.writeText(getQuoteAtIndex(index));
+
+    setIsCopyAlertShowing(true);
+  };
+
   useEffect(() => {
-    console.log(index);
-  }, [index]);
+    isCopyAlertShowing &&
+      setTimeout(() => {
+        setIsCopyAlertShowing(false);
+      }, 1000);
+  }, [isCopyAlertShowing]);
 
   const handleScroll = (event: React.WheelEvent<HTMLDivElement>) => {
     const delta = event.deltaY;
@@ -57,13 +70,18 @@ export const Quotes: FC = () => {
       className="h-screen w-screen p-5 font-serif flex flex-col"
       onWheel={handleScroll}
     >
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <span
           onClick={() => navigate("/")}
           className="text-2xl font-bold cursor-pointer"
         >
           wyse
         </span>
+        <h2 className="text-base text-neutral-600">
+          {langage === "fr"
+            ? "50 Points de Conseils d'un Homme de 80 Ans"
+            : "50 Points Of Advice From An 80-Year-Old Man"}
+        </h2>
         <SelectLangage />
       </div>
 
@@ -75,7 +93,10 @@ export const Quotes: FC = () => {
             {q}
           </div>
 
-          <div className="flex text-base mt-3 items-center text-neutral-800 justify-center">
+          <div
+            onClick={() => setIndex(index === 0 ? 49 : index - 1)}
+            className="flex text-base mt-3 cursor-pointer items-center text-neutral-800 justify-center"
+          >
             {q}
             {index === 0 ? getQuoteAtIndex(49) : getQuoteAtIndex(index - 1)}
             {q}
@@ -86,13 +107,32 @@ export const Quotes: FC = () => {
             {getQuoteAtIndex(index)}
             {q}
             <div className="flex mt-4 gap-10">
-              <FaShare className="text-neutral-800 hover:text-white cursor-pointer text-base" />
-              <FaCopy className="text-neutral-800 hover:text-white cursor-pointer text-base" />
+              <WhatsappShareButton
+                url={`"${getQuoteAtIndex(index)}" - from ${
+                  langage === "fr"
+                    ? "50 Points de Conseils d'un Homme de 80 Ans"
+                    : "50 Points Of Advice From An 80-Year-Old Man"
+                }`}
+              >
+                <FaWhatsapp className="text-neutral-800 hover:text-white cursor-pointer text-xl" />
+              </WhatsappShareButton>
+              <FaCopy
+                onClick={handleCopyQuote}
+                className="text-neutral-800 hover:text-white cursor-pointer text-base"
+              />
+
               <FaHeart className="text-red-950 hover:text-red-600 cursor-pointer text-base" />
             </div>
+
+            {isCopyAlertShowing && (
+              <span className="text-primary text-xs">Copied !</span>
+            )}
           </div>
 
-          <div className="flex text-base items-center text-neutral-800 justify-center">
+          <div
+            onClick={() => setIndex(index === lastIndex ? 0 : index + 1)}
+            className="flex cursor-pointer text-base items-center text-neutral-800 justify-center"
+          >
             {q}
             {index === lastIndex
               ? getQuoteAtIndex(0)
@@ -121,6 +161,7 @@ export const Quotes: FC = () => {
           <span className="text-sm mb-3 -top-10 absolute text-neutral-600">
             {index + 1} / 50
           </span>
+
           <input
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setIndex(+e.target.value)
