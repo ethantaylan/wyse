@@ -68,7 +68,7 @@ export const Quotes: FC = () => {
       </div>
 
       <div className="flex h-full items-center justify-center">
-        <div className="flex px-5 flex-col max-w-5xl text-center text-2xl items-center justify-center mt-20">
+        <div className="flex px-5 flex-col max-w-5xl text-center text-2xl items-center justify-center">
           <div className="flex text-sm items-center text-neutral-900 justify-center">
             {q}
             {index === 0 ? getQuoteAtIndex(48) : getQuoteAtIndex(index - 2)}
