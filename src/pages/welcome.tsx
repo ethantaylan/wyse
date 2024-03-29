@@ -7,7 +7,7 @@ export const Welcome = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigate("/quotes");
+      navigate("/advices");
     }, 3000);
   }, []);
 
