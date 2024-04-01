@@ -1,4 +1,4 @@
-export const fr: string[] = [
+export const advices: string[] = [
   "Serrez la main fermement",
   "Regardez les gens dans les yeux",
   "Chantez sous la douche",

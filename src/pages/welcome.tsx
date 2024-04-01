@@ -1,8 +1,9 @@
 import { animated, useSpring } from "@react-spring/web";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Logo } from "../components/logo";
 
-export const Welcome = () => {
+export const Welcome: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export const Welcome = () => {
       style={{ ...springs }}
       className="flex h-screen w-screen justify-center font-serif items-center"
     >
-      <h1 className="mb-5 font-black text-3xl">wyse</h1>
+      <Logo />
     </animated.div>
   );
 };

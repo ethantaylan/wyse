@@ -19,7 +19,7 @@ export const SelectLangage: FC = () => {
 
   return (
     <div className="flex gap-5">
-      {["en", "fr", "tr"].map((l: string) => (
+      {["fr"].map((l: string) => (
         <button
           key={l}
           onClick={() => handleLangageDispatch(l)}
