@@ -13,7 +13,7 @@ export const Logo: FC = () => {
         wyse
       </span>
       <h2 className="text-base text-neutral-600">
-        {"50 Points de Conseils d'un Homme de 80 Ans"}
+        {"50 Conseils d'un Homme de 80 Ans"}
       </h2>
     </div>
   );
