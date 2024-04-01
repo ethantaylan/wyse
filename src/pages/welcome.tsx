@@ -21,7 +21,7 @@ export const Welcome: FC = () => {
   return (
     <animated.div
       style={{ ...springs }}
-      className="flex h-screen w-screen justify-center font-serif items-center"
+      className="flex h-full justify-center font-serif items-center"
     >
       <Logo />
     </animated.div>

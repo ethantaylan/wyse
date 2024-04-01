@@ -1,14 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AppLayout } from "./components/applayout";
+import { Advices } from "./pages/advices";
 import { Welcome } from "./pages/welcome";
-import { Main } from "./pages/main";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/advices" element={<Main />} />
-      </Routes>
+      <AppLayout>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/advices" element={<Advices />} />
+        </Routes>
+      </AppLayout>
     </BrowserRouter>
   );
 }

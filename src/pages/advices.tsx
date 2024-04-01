@@ -5,7 +5,7 @@ import { Logo } from "../components/logo";
 import { Pagination } from "../components/pagination";
 import { advices as adv } from "../constants/advices";
 
-export interface Quotes {
+export interface Advices {
   twoLastQuote: string;
   lastQuote: string;
   quote: string;
@@ -13,7 +13,7 @@ export interface Quotes {
   twoNextQuote: string;
 }
 
-const defaultQuotes: Quotes = {
+const defaultQuotes: Advices = {
   lastQuote: "",
   nextQuote: "",
   quote: "",
@@ -21,10 +21,9 @@ const defaultQuotes: Quotes = {
   twoNextQuote: "",
 };
 
-export const Main: FC = () => {
+export const Advices: FC = () => {
   const [index, setIndex] = useState<number>(0);
-  const [isCopyAlertShowing, setIsCopyAlertShowing] = useState<boolean>(false);
-  const [quotes, setQuotes] = useState<Quotes>(defaultQuotes);
+  const [quotes, setQuotes] = useState<Advices>(defaultQuotes);
 
   const advices = useMemo(() => adv, []);
 
@@ -58,16 +57,14 @@ export const Main: FC = () => {
     {
       quote: quote,
       isMainQuote: true,
-      children: (
-        <AdviceItemActions quote={quote}  />
-      ),
+      children: <AdviceItemActions quote={quote} />,
     },
     { quote: nextQuote, onClick: () => handleMove(1) },
     { quote: twoNextQuote, isSecondaryQuote: true },
   ];
 
   return (
-    <div className="h-screen w-screen items-center justify-between p-5 font-serif flex flex-col">
+    <div className="items-center h-full justify-between p-5 font-serif flex flex-col">
       <Logo />
 
       <div className="flex px-5 flex-col max-w-5xl text-center text-2xl items-center justify-center">
