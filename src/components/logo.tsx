@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { subtitle } from "../constants/subtitle";
 
 export const Logo: FC = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export const Logo: FC = () => {
         wyse
       </span>
       <h2 className="text-base text-neutral-600">
-        {"50 Conseils d'un Homme de 80 Ans"}
+        {subtitle}
       </h2>
     </div>
   );

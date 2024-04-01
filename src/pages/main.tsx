@@ -44,11 +44,6 @@ export const Main: FC = () => {
     calculateQuotes();
   }, [index, advices, lastIndex]);
 
-  const handleCopyQuote = () => {
-    navigator.clipboard.writeText(quotes.quote);
-    setIsCopyAlertShowing(true);
-  };
-
   const handleMove = (delta: number) => {
     setIndex(
       (prevIndex) => (prevIndex + delta + advices.length) % advices.length,
@@ -64,12 +59,7 @@ export const Main: FC = () => {
       quote: quote,
       isMainQuote: true,
       children: (
-        <>
-          <AdviceItemActions quote={quote} onQuoteCopy={handleCopyQuote} />
-          {isCopyAlertShowing && (
-            <span className="text-primary font-sans text-xs">Copied !</span>
-          )}
-        </>
+        <AdviceItemActions quote={quote}  />
       ),
     },
     { quote: nextQuote, onClick: () => handleMove(1) },

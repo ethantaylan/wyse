@@ -24,7 +24,7 @@ export const Pagination: FC<PaginationProps> = ({
       </button>
 
       <div className="w-4/6 relative flex flex-col items-center">
-        <span className="text-sm mb-3 -top-10 absolute text-neutral-600">
+        <span className="text-sm -top-10 absolute text-neutral-600">
           {index + 1} / 50
         </span>
 
